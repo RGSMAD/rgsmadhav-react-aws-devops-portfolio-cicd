@@ -22,10 +22,10 @@ const projects = [
   },
   {
     icon: Rocket,
-    title: "Upcoming: Kubernetes Platform on EKS",
-    desc: "GitOps-driven Kubernetes platform on Amazon EKS with ArgoCD, Helm, and Prometheus stack. Coming soon.",
-    tags: ["EKS", "Kubernetes", "ArgoCD", "Helm"],
-    metrics: ["In progress", "GitOps", "Observability"],
+    title: "Project 3",
+    desc: "Coming soon.",
+    tags: [],
+    metrics: [],
     github: "#",
     githubDisabled: true,
   },
@@ -50,19 +50,23 @@ const Projects = () => (
             <h3 className="font-display font-bold text-xl mb-2">{p.title}</h3>
             <p className="text-sm text-muted-foreground mb-4 flex-1">{p.desc}</p>
 
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {p.tags.map((t) => (
-                <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground font-medium">{t}</span>
-              ))}
-            </div>
+            {p.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {p.tags.map((t) => (
+                  <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground font-medium">{t}</span>
+                ))}
+              </div>
+            )}
 
-            <div className="grid grid-cols-3 gap-2 mb-4 pt-4 border-t border-border">
-              {p.metrics.map((m) => (
-                <div key={m} className="text-center">
-                  <div className="text-xs font-semibold text-primary">{m}</div>
-                </div>
-              ))}
-            </div>
+            {p.metrics.length > 0 && (
+              <div className="grid grid-cols-3 gap-2 mb-4 pt-4 border-t border-border">
+                {p.metrics.map((m) => (
+                  <div key={m} className="text-center">
+                    <div className="text-xs font-semibold text-primary">{m}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {p.github !== null && (
               <Button
@@ -70,7 +74,7 @@ const Projects = () => (
                 variant="outline"
                 size="sm"
                 disabled={p.githubDisabled}
-                className="w-full"
+                className="w-full mt-auto"
               >
                 {p.githubDisabled ? (
                   <span className="flex items-center justify-center gap-2">

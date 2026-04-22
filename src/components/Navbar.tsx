@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Rocket } from "lucide-react";
+import { Menu, X, Rocket, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -9,7 +9,6 @@ const links = [
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#achievements", label: "Achievements" },
-  { href: "#certifications", label: "Certifications" },
   { href: "#objective", label: "Objective" },
   { href: "#contact", label: "Contact" },
 ];
@@ -18,6 +17,22 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const dark = stored ? stored === "dark" : prefersDark;
+    document.documentElement.classList.toggle("dark", dark);
+    setIsDark(dark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -56,7 +71,14 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-secondary text-foreground/80 hover:text-primary transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
           <Button asChild variant="cta" size="sm" className="hidden sm:inline-flex">
             <a href="#contact">Hire Me</a>
           </Button>
