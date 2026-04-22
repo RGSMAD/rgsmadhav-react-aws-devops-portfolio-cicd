@@ -1,28 +1,62 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const EMAIL = "rajoligirisai.madhav@gmail.com";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+
+    if (!name || !email || !message) {
       toast({ title: "Please fill all fields", variant: "destructive" });
       return;
     }
-    const subject = encodeURIComponent(`Hire inquiry from ${form.name}`);
-    const body = encodeURIComponent(
-      `Hi Madhav,\n\n${form.message}\n\nBest regards,\n${form.name}\n${form.email}`
-    );
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    toast({ title: "Opening your email client…" });
+    if (name.length > 100) {
+      toast({ title: "Name is too long", variant: "destructive" });
+      return;
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email) || email.length > 255) {
+      toast({ title: "Please enter a valid email", variant: "destructive" });
+      return;
+    }
+    if (message.length > 2000) {
+      toast({ title: "Message is too long (max 2000 chars)", variant: "destructive" });
+      return;
+    }
+
+    setSending(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-message", {
+        body: { name, email, message },
+      });
+      if (error) throw error;
+      toast({ title: "Message sent!", description: "I'll get back to you within 24 hours." });
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      const subject = encodeURIComponent(`Hire inquiry from ${name}`);
+      const body = encodeURIComponent(`Hi Madhav,\n\n${message}\n\nBest regards,\n${name}\n${email}`);
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+      toast({
+        title: "Opening your email client…",
+        description: "Direct send unavailable — your email client will open instead.",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -39,26 +73,28 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
-          {/* Form */}
           <form onSubmit={handleSubmit} className="lg:col-span-3 glass-card p-8 rounded-3xl space-y-5">
             <div>
               <Label htmlFor="name">Name</Label>
-              <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="mt-1.5" />
+              <Input id="name" maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="mt-1.5" />
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="john@company.com" className="mt-1.5" />
+              <Input id="email" type="email" maxLength={255} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="john@company.com" className="mt-1.5" />
             </div>
             <div>
               <Label htmlFor="message">Message</Label>
-              <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell me about the role / project…" className="mt-1.5" />
+              <Textarea id="message" rows={5} maxLength={2000} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell me about the role / project…" className="mt-1.5" />
             </div>
-            <Button type="submit" variant="cta" size="lg" className="w-full">
-              <Send className="w-4 h-4" />Send Message
+            <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
+              {sending ? (
+                <><Loader2 className="w-4 h-4 animate-spin" />Sending…</>
+              ) : (
+                <><Send className="w-4 h-4" />Send Message</>
+              )}
             </Button>
           </form>
 
-          {/* Contact info */}
           <div className="lg:col-span-2 space-y-4">
             <a href={`mailto:${EMAIL}`} className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
               <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Mail className="w-5 h-5 text-primary-foreground" /></div>
