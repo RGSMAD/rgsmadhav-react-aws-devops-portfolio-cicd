@@ -13,7 +13,7 @@ const jobs = [
     ],
   },
   {
-    role: "Application Support Engineer",
+    role: "Info Tech Senior Associate",
     company: "NTT Data",
     period: "2.7 years",
     points: [

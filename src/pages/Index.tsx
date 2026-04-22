@@ -4,7 +4,7 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
-import Achievements from "@/components/Achievements";
+import AchievementsAndCerts from "@/components/AchievementsAndCerts";
 import Objective from "@/components/Objective";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -19,7 +19,7 @@ const Index = () => {
         <Skills />
         <Experience />
         <Projects />
-        <Achievements />
+        <AchievementsAndCerts />
         <Objective />
         <Contact />
       </main>
