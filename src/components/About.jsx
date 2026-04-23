@@ -1,4 +1,4 @@
-import { GraduationCap, TrendingUp, Cloud, Brain } from "lucide-react";
+import { TrendingUp, Cloud, Brain } from "lucide-react";
 
 const highlights = [
   { icon: TrendingUp, label: "99.9% Uptime", desc: "in production systems" },
@@ -18,22 +18,22 @@ const About = () => (
 
       <div className="grid lg:grid-cols-2 gap-10 items-center">
         <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
-          <div className="flex items-start gap-3">
-            <GraduationCap className="w-6 h-6 text-primary shrink-0 mt-1" />
-            <p><strong className="text-foreground">B.Tech in Electrical & Electronics Engineering</strong> from JNTUA (2021).</p>
-          </div>
           <p>
-            My journey began in <strong>Banking</strong>, evolved through <strong>Mainframe modernization</strong> (COBOL),
-            and has now firmly transitioned into <span className="text-primary font-semibold">Cloud & DevOps</span>.
+            I started my professional career in <strong>IT</strong>, working on{" "}
+            <strong>Mainframe modernization</strong> (COBOL, JCL, DB2) at{" "}
+            <strong>NTT Data</strong>, where I supported high-availability systems for{" "}
+            <strong>US banking clients</strong>. That experience gave me a strong foundation
+            in production discipline, SLAs, and incident response.
           </p>
           <p>
-            With ~3 years of experience supporting high-availability production systems, I bring a rare combination of
-            <strong> legacy reliability discipline</strong> and modern <strong>cloud-native automation skills</strong> —
-            using AWS, Terraform, and CI/CD to ship faster, safer, and at scale.
+            I have since transitioned firmly into{" "}
+            <span className="text-primary font-semibold">Cloud & DevOps</span> — building
+            scalable, automated infrastructure with <strong>AWS</strong>,{" "}
+            <strong>Terraform</strong>, and modern CI/CD pipelines.
           </p>
           <p className="text-muted-foreground">
-            I thrive on solving real-world infrastructure problems — whether it's reducing deployment times,
-            automating manual toil, or hardening systems against threats.
+            I thrive on solving real-world infrastructure problems — whether it's reducing
+            deployment times, automating manual toil, or hardening systems against threats.
           </p>
         </div>
 

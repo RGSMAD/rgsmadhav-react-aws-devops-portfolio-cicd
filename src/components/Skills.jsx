@@ -1,7 +1,7 @@
 import { Cloud, Code2, GitBranch, Container, Terminal, Activity, Database, Server, Brain } from "lucide-react";
 
 const groups = [
-  { icon: Cloud, title: "Cloud (AWS)", items: ["EC2", "VPC", "S3", "RDS", "Lambda", "CloudFront", "Route53", "IAM", "ALB/ASG"] },
+  { icon: Cloud, title: "Cloud (AWS)", items: ["EC2", "VPC", "S3", "RDS", "Lambda", "CloudFront", "Route53", "IAM", "ALB/ASG", "EBS", "EFS", "SNS", "SQS", "API Gateway", "Secrets Manager", "KMS", "CloudTrail", "Systems Manager", "WAF", "Shield"] },
   { icon: Code2, title: "Infrastructure as Code", items: ["Terraform", "CloudFormation", "Modules", "Remote State"] },
   { icon: GitBranch, title: "CI/CD", items: ["GitHub Actions", "Pipelines", "Blue/Green", "Auto Rollbacks"] },
   { icon: Container, title: "Containers", items: ["Docker", "Kubernetes", "ECS", "EKS"] },

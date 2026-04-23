@@ -8,6 +8,7 @@ const links = [
   { href: "#skills", label: "Skills" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
+  { href: "#education", label: "Education" },
   { href: "#achievements", label: "Achievements" },
   { href: "#objective", label: "Objective" },
   { href: "#contact", label: "Contact" },
@@ -56,7 +57,7 @@ const Navbar = () => {
           <span className="w-9 h-9 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
             <Rocket className="w-5 h-5 text-primary-foreground" />
           </span>
-          <span className="text-gradient">RGM</span>
+          <span className="text-gradient">RGSM</span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-1">

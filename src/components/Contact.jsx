@@ -53,7 +53,38 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
-          <form onSubmit={handleSubmit} className="lg:col-span-3 glass-card p-8 rounded-3xl space-y-5">
+          <div className="lg:col-span-2 space-y-4 lg:order-1 order-2">
+            <a href={`mailto:${EMAIL}`} className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Mail className="w-5 h-5 text-primary-foreground" /></div>
+              <div className="min-w-0">
+                <div className="text-xs text-muted-foreground">Email</div>
+                <div className="font-semibold truncate">{EMAIL}</div>
+              </div>
+            </a>
+            <a href="tel:+919121775542" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Phone className="w-5 h-5 text-primary-foreground" /></div>
+              <div>
+                <div className="text-xs text-muted-foreground">Phone</div>
+                <div className="font-semibold">+91 91217 75542</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/rajoli-girisai-madhav" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Linkedin className="w-5 h-5 text-primary-foreground" /></div>
+              <div>
+                <div className="text-xs text-muted-foreground">LinkedIn</div>
+                <div className="font-semibold">rajoli-girisai-madhav</div>
+              </div>
+            </a>
+            <a href="https://github.com/" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Github className="w-5 h-5 text-primary-foreground" /></div>
+              <div>
+                <div className="text-xs text-muted-foreground">GitHub</div>
+                <div className="font-semibold">View Repositories</div>
+              </div>
+            </a>
+          </div>
+
+          <form onSubmit={handleSubmit} className="lg:col-span-3 glass-card p-8 rounded-3xl space-y-5 lg:order-2 order-1">
             <div>
               <Label htmlFor="name">Name</Label>
               <Input id="name" maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="mt-1.5" />
@@ -74,36 +105,6 @@ const Contact = () => {
             </p>
           </form>
 
-          <div className="lg:col-span-2 space-y-4">
-            <a href={`mailto:${EMAIL}`} className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Mail className="w-5 h-5 text-primary-foreground" /></div>
-              <div className="min-w-0">
-                <div className="text-xs text-muted-foreground">Email</div>
-                <div className="font-semibold truncate">{EMAIL}</div>
-              </div>
-            </a>
-            <a href="tel:+910000000000" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Phone className="w-5 h-5 text-primary-foreground" /></div>
-              <div>
-                <div className="text-xs text-muted-foreground">Phone</div>
-                <div className="font-semibold">+91 — Available on request</div>
-              </div>
-            </a>
-            <a href="https://linkedin.com/in/girisai-madhav" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Linkedin className="w-5 h-5 text-primary-foreground" /></div>
-              <div>
-                <div className="text-xs text-muted-foreground">LinkedIn</div>
-                <div className="font-semibold">girisai-madhav</div>
-              </div>
-            </a>
-            <a href="https://github.com/" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Github className="w-5 h-5 text-primary-foreground" /></div>
-              <div>
-                <div className="text-xs text-muted-foreground">GitHub</div>
-                <div className="font-semibold">View Repositories</div>
-              </div>
-            </a>
-          </div>
         </div>
       </div>
     </section>

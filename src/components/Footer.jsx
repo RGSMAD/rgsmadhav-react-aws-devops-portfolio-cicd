@@ -10,7 +10,7 @@ const Footer = () => (
         <p className="text-sm text-muted-foreground">AWS DevOps Engineer · Building the cloud, one commit at a time.</p>
       </div>
       <div className="flex items-center gap-3">
-        <a href="https://linkedin.com/in/girisai-madhav" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:shadow-glow hover:-translate-y-1 transition-all">
+        <a href="https://linkedin.com/in/rajoli-girisai-madhav" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:shadow-glow hover:-translate-y-1 transition-all">
           <Linkedin className="w-4 h-4 text-primary" />
         </a>
         <a href="https://github.com/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:shadow-glow hover:-translate-y-1 transition-all">
