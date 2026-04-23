@@ -1,19 +1,17 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Send, Loader2 } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const EMAIL = "rajoligirisai.madhav@gmail.com";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sending, setSending] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const name = form.name.trim();
     const email = form.email.trim();
@@ -23,43 +21,22 @@ const Contact = () => {
       toast({ title: "Please fill all fields", variant: "destructive" });
       return;
     }
-    if (name.length > 100) {
-      toast({ title: "Name is too long", variant: "destructive" });
-      return;
-    }
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(email) || email.length > 255) {
+    if (!emailRe.test(email)) {
       toast({ title: "Please enter a valid email", variant: "destructive" });
       return;
     }
-    if (message.length > 2000) {
-      toast({ title: "Message is too long (max 2000 chars)", variant: "destructive" });
-      return;
-    }
 
-    setSending(true);
-    try {
-      const { error } = await supabase
-        .from("contact_messages")
-        .insert({ name, email, message });
-      if (error) throw error;
-      toast({
-        title: "Message sent!",
-        description: "Thanks for reaching out — I'll get back to you within 24 hours.",
-      });
-      setForm({ name: "", email: "", message: "" });
-    } catch (err) {
-      console.error(err);
-      const subject = encodeURIComponent(`Hire inquiry from ${name}`);
-      const body = encodeURIComponent(`Hi Madhav,\n\n${message}\n\nBest regards,\n${name}\n${email}`);
-      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-      toast({
-        title: "Opening your email client…",
-        description: "Direct send unavailable — your email client will open instead.",
-      });
-    } finally {
-      setSending(false);
-    }
+    const subject = encodeURIComponent(`Hire inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Hi Madhav,\n\n${message}\n\nBest regards,\n${name}\n${email}`
+    );
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+
+    toast({
+      title: "Opening your email client…",
+      description: "Your default mail app will open with the message ready to send.",
+    });
   };
 
   return (
@@ -89,13 +66,12 @@ const Contact = () => {
               <Label htmlFor="message">Message</Label>
               <Textarea id="message" rows={5} maxLength={2000} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell me about the role / project…" className="mt-1.5" />
             </div>
-            <Button type="submit" variant="cta" size="lg" className="w-full" disabled={sending}>
-              {sending ? (
-                <><Loader2 className="w-4 h-4 animate-spin" />Sending…</>
-              ) : (
-                <><Send className="w-4 h-4" />Send Message</>
-              )}
+            <Button type="submit" variant="cta" size="lg" className="w-full">
+              <Send className="w-4 h-4" />Send Message
             </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              Submitting opens your default email client with the message pre-filled.
+            </p>
           </form>
 
           <div className="lg:col-span-2 space-y-4">
