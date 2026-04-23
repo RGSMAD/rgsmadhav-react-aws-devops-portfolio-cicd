@@ -119,7 +119,7 @@ const Hero = () => {
               <img
                 src={profileSrc}
                 alt="Rajoli Girisai Madhav — AWS DevOps Engineer"
-                className="w-full h-full object-cover object-top scale-90"
+                className="w-full h-full object-contain bg-background"
                 width={400}
                 height={400}
               />
