@@ -1,0 +1,74 @@
+name: Portfolio Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      aws_region:
+        required: true
+        default: ap-south-1
+
+jobs:
+  portfolio-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Ensure AWS CLI is installed
+        run: |
+          if ! command -v aws &> /dev/null
+          then
+            echo "Installing AWS CLI..."
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -q awscliv2.zip
+            sudo ./aws/install
+          else
+            echo "AWS CLI already present"
+          fi
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ github.event.inputs.aws_region || 'ap-south-1' }}
+
+      - name: Detect build directory
+        run: |
+          if [ -d "build" ]; then
+            echo "OUTPUT_DIR=build" >> $GITHUB_ENV
+          elif [ -d "dist" ]; then
+            echo "OUTPUT_DIR=dist" >> $GITHUB_ENV
+          else
+            echo "No build output found"
+            exit 1
+          fi
+
+      - name: Show build output
+        run: ls -la $OUTPUT_DIR
+
+      - name: Validate build is not empty
+        run: |
+          if [ -z "$(ls -A $OUTPUT_DIR)" ]; then
+            echo "Build directory is empty"
+            exit 1
+          fi
+
+      - name: Deploy to S3
+        run: aws s3 sync $OUTPUT_DIR/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
