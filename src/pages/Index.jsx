@@ -9,6 +9,7 @@ import AchievementsAndCerts from "@/components/AchievementsAndCerts";
 import Objective from "@/components/Objective";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import AssetUploader from "@/components/AssetUploader";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      <AssetUploader />
     </div>
   );
 };

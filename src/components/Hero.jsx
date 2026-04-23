@@ -25,12 +25,29 @@ const metrics = [
 
 const Hero = () => {
   const [kwIndex, setKwIndex] = useState(0);
+  const [profileSrc, setProfileSrc] = useState(profile);
+  const [resumeHref, setResumeHref] = useState("/resume.pdf");
+  const [resumeName, setResumeName] = useState("resume.pdf");
 
   useEffect(() => {
     const id = setInterval(() => {
       setKwIndex((i) => (i + 1) % keywords.length);
     }, 2500);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const sync = () => {
+      const pic = localStorage.getItem("rgsm:profile_pic");
+      const resume = localStorage.getItem("rgsm:resume_pdf");
+      const name = localStorage.getItem("rgsm:resume_name");
+      setProfileSrc(pic || profile);
+      setResumeHref(resume || "/resume.pdf");
+      setResumeName(name || "resume.pdf");
+    };
+    sync();
+    window.addEventListener("rgsm:assets-updated", sync);
+    return () => window.removeEventListener("rgsm:assets-updated", sync);
   }, []);
 
   return (
@@ -70,7 +87,7 @@ const Hero = () => {
               <a href="#contact"><Mail className="w-4 h-4" />Hire Me</a>
             </Button>
             <Button asChild variant="hero" size="lg">
-              <a href="/resume.pdf" download>
+              <a href={resumeHref} download={resumeName}>
                 <Download className="w-4 h-4" />Resume
               </a>
             </Button>
@@ -100,7 +117,7 @@ const Hero = () => {
             {/* Profile image */}
             <div className="absolute inset-10 rounded-full overflow-hidden border-4 border-background shadow-glow">
               <img
-                src={profile}
+                src={profileSrc}
                 alt="Rajoli Girisai Madhav — AWS DevOps Engineer"
                 className="w-full h-full object-cover"
                 width={400}
