@@ -64,7 +64,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden bg-gradient-hero mesh-bg">
+    <section id="home" className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden mesh-bg">
       <div className="absolute top-1/4 -left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float-slow" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-float" />
 

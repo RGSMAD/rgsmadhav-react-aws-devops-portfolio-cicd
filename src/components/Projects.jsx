@@ -144,7 +144,7 @@ const ProjectCard = ({ p }) => {
 };
 
 const Projects = () => (
-  <section id="projects" className="section-pad bg-gradient-hero mesh-bg">
+  <section id="projects" className="section-pad mesh-bg">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-14">
         <span className="text-accent font-semibold uppercase tracking-widest text-sm">Portfolio</span>
