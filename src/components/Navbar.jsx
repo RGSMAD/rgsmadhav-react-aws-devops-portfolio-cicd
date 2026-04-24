@@ -57,7 +57,7 @@ const Navbar = () => {
           <span className="w-9 h-9 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
             <Rocket className="w-5 h-5 text-primary-foreground" />
           </span>
-          <span className="text-gradient">RGSM</span>
+          <span><span className="text-foreground">RGS </span><span className="text-gradient">Madhav</span></span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -75,7 +75,18 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-secondary text-foreground/80 hover:text-primary transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border hover:border-primary/50 hover:bg-secondary transition-colors text-sm font-medium"
+            aria-label="Toggle theme"
+          >
+            {isDark ? (
+              <><Sun className="w-4 h-4 text-accent" /><span className="text-accent">Light</span></>
+            ) : (
+              <><Moon className="w-4 h-4 text-primary" /><span className="text-primary">Dark</span></>
+            )}
+          </button>
+          <button
+            onClick={toggleTheme}
+            className="sm:hidden p-2 rounded-lg hover:bg-secondary text-foreground/80"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

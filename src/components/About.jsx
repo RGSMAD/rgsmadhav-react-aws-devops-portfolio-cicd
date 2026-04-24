@@ -19,21 +19,25 @@ const About = () => (
       <div className="grid lg:grid-cols-2 gap-10 items-center">
         <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
           <p>
-            I started my professional career in <strong>IT</strong>, working on{" "}
-            <strong>Mainframe modernization</strong> (COBOL, JCL, DB2) at{" "}
-            <strong>NTT Data</strong>, where I supported high-availability systems for{" "}
-            <strong>US banking clients</strong>. That experience gave me a strong foundation
-            in production discipline, SLAs, and incident response.
+            I began my career in <strong>enterprise banking systems</strong> at{" "}
+            <strong>NTT Data</strong>, working with <strong>Mainframes (COBOL, JCL)</strong>, where I learned the importance
+            of reliability, production stability, and maintaining{" "}
+            <span className="text-primary font-semibold">99.9% uptime</span> in mission-critical environments.
           </p>
           <p>
-            I have since transitioned firmly into{" "}
-            <span className="text-primary font-semibold">Cloud & DevOps</span> — building
-            scalable, automated infrastructure with <strong>AWS</strong>,{" "}
-            <strong>Terraform</strong>, and modern CI/CD pipelines.
+            Driven by a passion for modern infrastructure, I transitioned into{" "}
+            <span className="text-primary font-semibold">Cloud and DevOps</span>. I've since designed and deployed
+            scalable AWS architectures, implemented CI/CD pipelines, and reduced deployment times to{" "}
+            <span className="text-accent font-semibold">under 15 minutes</span> through automation.
+          </p>
+          <p>
+            Today, I focus on building <strong>secure, high-availability systems</strong> using{" "}
+            <strong>AWS and Terraform</strong> — combining strong production discipline with modern cloud practices
+            to deliver infrastructure that is both resilient and efficient.
           </p>
           <p className="text-muted-foreground">
-            I thrive on solving real-world infrastructure problems — whether it's reducing
-            deployment times, automating manual toil, or hardening systems against threats.
+            I enjoy understanding how systems behave in real-world environments and improving them through smarter
+            automation and design.
           </p>
         </div>
 
