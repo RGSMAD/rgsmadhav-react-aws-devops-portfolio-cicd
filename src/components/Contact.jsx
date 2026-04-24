@@ -103,9 +103,6 @@ const Contact = () => {
             <Button type="submit" variant="cta" size="lg" className="w-full">
               <Send className="w-4 h-4" />Send Message
             </Button>
-            <p className="text-xs text-muted-foreground text-center">
-              Submitting opens your default email client with the message pre-filled.
-            </p>
           </form>
 
         </div>
