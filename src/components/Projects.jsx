@@ -10,6 +10,10 @@ const projects = [
     tags: ["Terraform", "AWS", "Multi-Region", "CI/CD"],
     metrics: ["99.9% uptime", "<15 min deploy", "Auto-scaling"],
     github: "https://github.com/",
+    // Soft AWS-console inspired tint (light orange / amber)
+    frontTint: "bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/20 dark:to-yellow-950/20",
+    backTint: "bg-gradient-to-br from-orange-100 via-amber-100 to-rose-100 dark:from-orange-900/40 dark:via-amber-900/30 dark:to-rose-900/30",
+    accentText: "text-orange-700 dark:text-orange-200",
     details: [
       "Architected an active-active multi-region topology with Route 53 latency-based routing",
       "Authored reusable Terraform modules for VPC, ALB, ASG, RDS, and IAM with remote state",
@@ -28,6 +32,10 @@ const projects = [
     tags: ["AWS", "Security", "VPC", "WAF"],
     metrics: ["90% threat blocked", "Least privilege", "Encrypted"],
     github: null,
+    // Soft AWS-console inspired tint (light blue / sky)
+    frontTint: "bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-950/30 dark:via-blue-950/20 dark:to-indigo-950/20",
+    backTint: "bg-gradient-to-br from-sky-100 via-blue-100 to-indigo-100 dark:from-sky-900/40 dark:via-blue-900/30 dark:to-indigo-900/30",
+    accentText: "text-sky-700 dark:text-sky-200",
     details: [
       "Designed a secure two-tier VPC with public web tier and isolated private app tier",
       "Implemented strict security groups & NACLs following defense-in-depth principles",
@@ -47,6 +55,9 @@ const projects = [
     metrics: [],
     github: "#",
     githubDisabled: true,
+    frontTint: "bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/20 dark:to-cyan-950/20",
+    backTint: "bg-gradient-to-br from-emerald-100 via-teal-100 to-cyan-100 dark:from-emerald-900/40 dark:via-teal-900/30 dark:to-cyan-900/30",
+    accentText: "text-emerald-700 dark:text-emerald-200",
     details: [],
   },
 ];
@@ -64,10 +75,10 @@ const ProjectCard = ({ p }) => {
         className={`relative w-full transition-transform duration-700 [transform-style:preserve-3d] ${
           flipped ? "[transform:rotateY(180deg)]" : ""
         }`}
-        style={{ minHeight: "420px" }}
+        style={{ minHeight: "480px" }}
       >
         {/* Front */}
-        <div className="glass-card p-6 rounded-2xl flex flex-col hover:shadow-glow transition-all hover:-translate-y-1 absolute inset-0 [backface-visibility:hidden]">
+        <div className={`glass-card ${p.frontTint} p-6 rounded-2xl flex flex-col hover:shadow-glow transition-all hover:-translate-y-1 absolute inset-0 [backface-visibility:hidden]`}>
           <div className="w-14 h-14 rounded-2xl bg-gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-glow">
             <p.icon className="w-7 h-7 text-primary-foreground" />
           </div>
@@ -86,13 +97,13 @@ const ProjectCard = ({ p }) => {
             <div className="grid grid-cols-3 gap-2 mb-4 pt-4 border-t border-border">
               {p.metrics.map((m) => (
                 <div key={m} className="text-center">
-                  <div className="text-xs font-semibold text-primary">{m}</div>
+                  <div className={`text-xs font-semibold ${p.accentText}`}>{m}</div>
                 </div>
               ))}
             </div>
           )}
 
-          <div className="flex items-center gap-2 mt-auto">
+          <div className="flex items-center gap-2">
             {p.github && (
               <Button
                 asChild={!p.githubDisabled}
@@ -116,7 +127,7 @@ const ProjectCard = ({ p }) => {
           </div>
 
           {hasBack && (
-            <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-accent font-semibold">
+            <div className="mt-3 pt-3 border-t border-border/60 flex items-center justify-center gap-1.5 text-xs text-accent font-semibold">
               <MousePointerClick className="w-3.5 h-3.5" />
               <span>Click for full details</span>
             </div>
@@ -125,17 +136,17 @@ const ProjectCard = ({ p }) => {
 
         {/* Back */}
         {hasBack && (
-          <div className="glass-card p-6 rounded-2xl absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-auto bg-gradient-primary">
-            <h3 className="font-display font-bold text-lg text-primary-foreground mb-3">{p.title}</h3>
-            <ul className="space-y-2 text-sm text-primary-foreground/95">
+          <div className={`glass-card ${p.backTint} p-6 rounded-2xl absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-auto`}>
+            <h3 className="font-display font-bold text-lg mb-3">{p.title}</h3>
+            <ul className="space-y-2 text-sm text-foreground/90">
               {p.details.map((d) => (
                 <li key={d} className="flex gap-2">
-                  <span className="shrink-0">▹</span>
+                  <span className={`shrink-0 ${p.accentText}`}>▹</span>
                   <span>{d}</span>
                 </li>
               ))}
             </ul>
-            <div className="mt-3 text-xs text-primary-foreground/70 text-center">Click to flip back</div>
+            <div className="mt-3 text-xs text-muted-foreground text-center">Click to flip back</div>
           </div>
         )}
       </div>
