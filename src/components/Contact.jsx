@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Send, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,7 +40,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-pad bg-gradient-hero mesh-bg">
+    <section id="contact" className="section-pad mesh-bg">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-accent font-semibold uppercase tracking-widest text-sm">Get in touch</span>
@@ -53,38 +53,41 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-2 space-y-4 lg:order-1 order-2">
+          <div className="lg:col-span-2 space-y-4">
             <a href={`mailto:${EMAIL}`} className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Mail className="w-5 h-5 text-primary-foreground" /></div>
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shrink-0"><Mail className="w-5 h-5 text-primary-foreground" /></div>
               <div className="min-w-0">
                 <div className="text-xs text-muted-foreground">Email</div>
                 <div className="font-semibold truncate">{EMAIL}</div>
               </div>
             </a>
             <a href="tel:+919121775542" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Phone className="w-5 h-5 text-primary-foreground" /></div>
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shrink-0"><Phone className="w-5 h-5 text-primary-foreground" /></div>
               <div>
                 <div className="text-xs text-muted-foreground">Phone</div>
                 <div className="font-semibold">+91 91217 75542</div>
               </div>
             </a>
-            <a href="https://linkedin.com/in/rajoli-girisai-madhav" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Linkedin className="w-5 h-5 text-primary-foreground" /></div>
+            <div className="glass-card p-5 rounded-2xl flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-cta flex items-center justify-center shrink-0"><MapPin className="w-5 h-5 text-accent-foreground" /></div>
               <div>
-                <div className="text-xs text-muted-foreground">LinkedIn</div>
-                <div className="font-semibold">rajoli-girisai-madhav</div>
+                <div className="text-xs text-muted-foreground">Location</div>
+                <div className="font-semibold">India</div>
+                <div className="text-xs text-primary font-medium">Open to Remote / Relocation</div>
               </div>
-            </a>
-            <a href="https://github.com/" target="_blank" rel="noreferrer" className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:shadow-glow transition-all hover:-translate-y-1 block">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center"><Github className="w-5 h-5 text-primary-foreground" /></div>
-              <div>
-                <div className="text-xs text-muted-foreground">GitHub</div>
-                <div className="font-semibold">View Repositories</div>
-              </div>
-            </a>
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <a href="https://linkedin.com/in/rajoli-girisai-madhav" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:shadow-glow hover:-translate-y-1 transition-all">
+                <Linkedin className="w-5 h-5 text-primary" />
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:shadow-glow hover:-translate-y-1 transition-all">
+                <Github className="w-5 h-5 text-primary" />
+              </a>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="lg:col-span-3 glass-card p-8 rounded-3xl space-y-5 lg:order-2 order-1">
+          <form onSubmit={handleSubmit} className="lg:col-span-3 glass-card p-8 rounded-3xl space-y-5">
             <div>
               <Label htmlFor="name">Name</Label>
               <Input id="name" maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="mt-1.5" />
@@ -100,9 +103,6 @@ const Contact = () => {
             <Button type="submit" variant="cta" size="lg" className="w-full">
               <Send className="w-4 h-4" />Send Message
             </Button>
-            <p className="text-xs text-muted-foreground text-center">
-              Submitting opens your default email client with the message pre-filled.
-            </p>
           </form>
 
         </div>

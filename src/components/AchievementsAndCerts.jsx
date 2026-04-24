@@ -1,4 +1,4 @@
-import { Trophy, Zap, Activity, Cog, Award, GraduationCap, BadgeCheck } from "lucide-react";
+import { Trophy, Zap, Activity, Cog, Award, GraduationCap, BadgeCheck, Database, Building2 } from "lucide-react";
 
 const achievements = [
   { icon: Zap, text: "Deployment time reduced to <15 minutes" },
@@ -8,8 +8,20 @@ const achievements = [
 ];
 
 const certs = [
-  { title: "SQL Certification", issuer: "HackerRank", color: "from-primary to-primary-glow" },
-  { title: "NTT Data Certifications", issuer: "NTT Data", color: "from-accent to-accent-glow" },
+  {
+    icon: Database,
+    title: "SQL Certification",
+    issuer: "HackerRank",
+    desc: "Verified proficiency in queries, joins, aggregations, and data handling for relational databases.",
+    gradient: "from-primary to-primary-glow",
+  },
+  {
+    icon: Building2,
+    title: "NTT Data Certifications",
+    issuer: "NTT Data",
+    desc: "Enterprise-level validation in mainframe operations, systems administration, and production support.",
+    gradient: "from-accent to-accent-glow",
+  },
 ];
 
 const AchievementsAndCerts = () => (
@@ -36,17 +48,28 @@ const AchievementsAndCerts = () => (
         ))}
       </div>
 
-      {/* Certifications */}
-      <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+      {/* Certifications - horizontal detailed cards */}
+      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {certs.map((c) => (
-          <div key={c.title} className="glass-card p-6 rounded-2xl text-center hover:shadow-glow transition-all hover:-translate-y-2 group">
-            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${c.color} mx-auto mb-4 flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform`}>
-              <GraduationCap className="w-8 h-8 text-primary-foreground" />
+          <div
+            key={c.title}
+            className="glass-card p-6 rounded-2xl flex items-start gap-5 hover:shadow-glow transition-all hover:-translate-y-1 group relative overflow-hidden"
+          >
+            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center shadow-glow shrink-0 group-hover:scale-110 transition-transform`}>
+              <c.icon className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h3 className="font-display font-bold text-lg mb-1">{c.title}</h3>
-            <div className="flex items-center justify-center gap-1.5 text-sm text-muted-foreground">
-              <BadgeCheck className="w-4 h-4 text-primary" />
-              {c.issuer}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-2 mb-1">
+                <h3 className="font-display font-bold text-lg">{c.title}</h3>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full shrink-0">
+                  <BadgeCheck className="w-3.5 h-3.5" />Verified
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-sm text-accent font-semibold mb-2">
+                <GraduationCap className="w-4 h-4" />
+                {c.issuer}
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
             </div>
           </div>
         ))}

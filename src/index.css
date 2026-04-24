@@ -110,10 +110,40 @@
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(60% 50% at 15% 18%, hsl(var(--chameleon-a) / 0.85) 0%, transparent 70%),
+      radial-gradient(55% 45% at 85% 12%, hsl(var(--chameleon-b) / 0.80) 0%, transparent 70%),
+      radial-gradient(60% 50% at 80% 80%, hsl(var(--chameleon-c) / 0.85) 0%, transparent 70%),
+      radial-gradient(55% 45% at 15% 85%, hsl(var(--chameleon-d) / 0.80) 0%, transparent 70%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    animation: chameleon 18s ease-in-out infinite;
   }
   h1, h2, h3, h4 { @apply font-display; }
+
+  :root {
+    --chameleon-a: 270 95% 82%;
+    --chameleon-b: 24 100% 78%;
+    --chameleon-c: 200 95% 78%;
+    --chameleon-d: 150 80% 78%;
+  }
+  .dark {
+    --chameleon-a: 270 70% 35%;
+    --chameleon-b: 24 80% 35%;
+    --chameleon-c: 200 75% 32%;
+    --chameleon-d: 150 60% 30%;
+  }
+}
+
+@keyframes chameleon {
+  0%   { filter: hue-rotate(0deg) saturate(1); }
+  25%  { filter: hue-rotate(60deg) saturate(1.1); }
+  50%  { filter: hue-rotate(-50deg) saturate(1.15); }
+  75%  { filter: hue-rotate(35deg) saturate(1.05); }
+  100% { filter: hue-rotate(0deg) saturate(1); }
 }
 
 @layer components {
