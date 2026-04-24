@@ -10,10 +10,6 @@ const projects = [
     tags: ["Terraform", "AWS", "Multi-Region", "CI/CD"],
     metrics: ["99.9% uptime", "<15 min deploy", "Auto-scaling"],
     github: "https://github.com/",
-    // Soft AWS-console inspired tint (light orange / amber)
-    frontTint: "bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/20 dark:to-yellow-950/20",
-    backTint: "bg-gradient-to-br from-orange-100 via-amber-100 to-rose-100 dark:from-orange-900/40 dark:via-amber-900/30 dark:to-rose-900/30",
-    accentText: "text-orange-700 dark:text-orange-200",
     details: [
       "Architected an active-active multi-region topology with Route 53 latency-based routing",
       "Authored reusable Terraform modules for VPC, ALB, ASG, RDS, and IAM with remote state",
@@ -32,10 +28,6 @@ const projects = [
     tags: ["AWS", "Security", "VPC", "WAF"],
     metrics: ["90% threat blocked", "Least privilege", "Encrypted"],
     github: null,
-    // Soft AWS-console inspired tint (light blue / sky)
-    frontTint: "bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-950/30 dark:via-blue-950/20 dark:to-indigo-950/20",
-    backTint: "bg-gradient-to-br from-sky-100 via-blue-100 to-indigo-100 dark:from-sky-900/40 dark:via-blue-900/30 dark:to-indigo-900/30",
-    accentText: "text-sky-700 dark:text-sky-200",
     details: [
       "Designed a secure two-tier VPC with public web tier and isolated private app tier",
       "Implemented strict security groups & NACLs following defense-in-depth principles",
@@ -55,9 +47,6 @@ const projects = [
     metrics: [],
     github: "#",
     githubDisabled: true,
-    frontTint: "bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/20 dark:to-cyan-950/20",
-    backTint: "bg-gradient-to-br from-emerald-100 via-teal-100 to-cyan-100 dark:from-emerald-900/40 dark:via-teal-900/30 dark:to-cyan-900/30",
-    accentText: "text-emerald-700 dark:text-emerald-200",
     details: [],
   },
 ];
